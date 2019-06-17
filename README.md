@@ -14,6 +14,7 @@ It also have an very basic backend that stores the items in memory.
 - [x] Check/Uncheck items
 - [x] Search items
 - [x] Loader while saving items on backend
+- [x] Remove items from the list before the backend responds
 - [ ] Create lists
 - [ ] Delete lists
 
