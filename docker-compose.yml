@@ -1,0 +1,23 @@
+
+version: '3'
+
+services:
+
+  front:
+    build:
+      dockerfile: docker/dev/Dockerfile
+      context: ./front
+    volumes:
+      - ./front/src:/src/src
+      - ./front/public:/src/public
+    ports:
+      - 3000:3000
+
+  server:
+    build:
+      dockerfile: docker/dev/Dockerfile
+      context: ./server
+    volumes:
+      - ./server:/src
+    ports:
+      - 4000:3000
