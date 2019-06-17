@@ -8,14 +8,14 @@ It also have an very basic backend that stores the items in memory.
 
 ## Features
 
-[x] Multiple todo lists
-[x] Add items to lists
-[x] Remove items from lists
-[x] Check/Uncheck items
-[x] Search items
-[x] Loader while saving items on backend
-[ ] Create lists
-[ ] Delete lists
+- [x] Multiple todo lists
+- [x] Add items to lists
+- [x] Remove items from lists
+- [x] Check/Uncheck items
+- [x] Search items
+- [x] Loader while saving items on backend
+- [ ] Create lists
+- [ ] Delete lists
 
 ## How to Run?
 
