@@ -15,14 +15,10 @@ const Header: React.FC = () => {
 
   const { todo } = useContext(TodoContext);
 
-  if (!todo) {
-    return null;
-  }
-
   return (
     <CardHeader
       avatar={
-        <Avatar aria-label="Recipe" className={classes.avatar}>
+        <Avatar className={classes.avatar}>
           {todo.title.substring(0, 1)}
         </Avatar>
       }

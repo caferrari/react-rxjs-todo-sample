@@ -1,12 +1,12 @@
 import React, { memo } from 'react';
 import Header from './Header';
-import ToDos from './ToDos';
+import ToDoList from './ToDoList';
 
 const MegaToDo: React.FC = () => {
   return (
     <div className="App">
       <Header />
-      <ToDos />
+      <ToDoList />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { Card, CardContent, makeStyles } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
 import { IToDo } from 'interfaces/IToDo';
-import React, { memo, useCallback, useRef, useState } from 'react';
+import React, { memo, useCallback, useMemo, useState } from 'react';
 import { useObservable } from 'react-use-observable';
 import { combineLatest, map } from 'rxjs/operators';
 import { filterService } from 'services/filter';
@@ -9,9 +9,9 @@ import { todoItemServiceFactory } from 'services/todoItems';
 
 import AddToDo from './AddToDo';
 import { ITodoContext, TodoContext } from './context';
-import ToDoItems from './ToDoItems';
 import ToDoActions from './ToDoActions';
 import ToDoHeader from './ToDoHeader';
+import ToDoItems from './ToDoItems';
 
 interface IProps {
   todo: IToDo
@@ -29,8 +29,12 @@ const useStyles = makeStyles(theme => ({
 const ToDo: React.FC<IProps> = ({ todo }) => {
   const classes = useStyles();
 
-  const { current: service } = useRef(todoItemServiceFactory(todo.id));
   const [ creating, setCreating ] = useState(false);
+
+  const service = useMemo(() => todoItemServiceFactory(todo.id), [todo.id]);
+
+  const createAction = useCallback(() => setCreating(true), []);
+  const closeDialogs = useCallback(() => setCreating(false), []);
 
   const [ items ] = useObservable(() => {
     return service.load().pipe(
@@ -44,30 +48,29 @@ const ToDo: React.FC<IProps> = ({ todo }) => {
     )
   }, [todo.id]);
 
-  const createAction = useCallback(() => setCreating(true), []);
-  const closeDialogs = useCallback(() => setCreating(false), []);
-
-  if (!service || !items || !todo) {
-    return null;
-  }
-
-  const contextValue: ITodoContext = {
+  const contextValue = useMemo((): ITodoContext => {
+    return {
+      todo,
+      items,
+      service,
+      createAction,
+      closeDialogs
+    }
+  }, [
     todo,
     items,
     service,
     createAction,
     closeDialogs
-  };
+  ]);
 
   return (
     <TodoContext.Provider value={contextValue}>
       <Card className={classes.card}>
         <ToDoHeader />
-        {
-        items.length > 0 && <CardContent>
-          <ToDoItems />
-        </CardContent>
-        }
+          <CardContent>
+            <ToDoItems />
+          </CardContent>
         <ToDoActions />
       </Card>
       { creating && <AddToDo /> }

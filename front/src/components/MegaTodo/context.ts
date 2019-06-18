@@ -5,7 +5,7 @@ import { TodoItemService } from 'services/todoItems';
 
 export interface ITodoContext {
   todo: IToDo;
-  items: IToDoItem[],
+  items?: IToDoItem[],
   service: TodoItemService,
   createAction: () => void,
   closeDialogs: () => void

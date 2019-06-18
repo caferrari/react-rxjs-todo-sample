@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ToDos: React.FC = () => {
+const ToDoList: React.FC = () => {
   const classes = useStyles();
 
   useEffect(todoService.load, []);
@@ -37,4 +37,4 @@ const ToDos: React.FC = () => {
   );
 }
 
-export default memo(ToDos);
+export default memo(ToDoList);

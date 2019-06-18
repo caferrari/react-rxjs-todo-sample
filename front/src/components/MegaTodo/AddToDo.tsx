@@ -20,29 +20,24 @@ const AddToDo: React.FC = () => {
 
     closeDialogs();
     service.addItem(todoText).subscribe();
-
   }, [todoText, closeDialogs, service]);
 
   return (
-    <Dialog
-        open={true}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle id="alert-dialog-slide-title">Create on {todo.title}</DialogTitle>
-        <DialogContent>
-          <Input autoFocus onChange={handleTextChange} value={todoText} />
-          { error && <Typography>{error}</Typography>}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={closeDialogs}>
-            Close
-          </Button>
-          <Button onClick={handleSave} color="primary">
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
+    <Dialog open={true}>
+      <DialogTitle>Create on {todo.title}</DialogTitle>
+      <DialogContent>
+        <Input autoFocus onChange={handleTextChange} value={todoText} />
+        { error && <Typography>{error}</Typography>}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={closeDialogs}>
+          Close
+        </Button>
+        <Button onClick={handleSave} color="primary">
+          Save
+        </Button>
+      </DialogActions>
+    </Dialog>
   )
 
 }

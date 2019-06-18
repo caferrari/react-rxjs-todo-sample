@@ -35,14 +35,16 @@ const ToDoItem: React.FC<IProps> = ({ value: item }) => {
         {
         isLoading
           ? <CircularProgress variant="indeterminate" size={20} />
-          : <Checkbox
-            edge="start"
-            onChange={checkHandler}
-            checked={item.done}
-            disabled={isLoading}
-            tabIndex={-1}
-            disableRipple
-          />
+          : (
+            <Checkbox
+              edge="start"
+              onChange={checkHandler}
+              checked={item.done}
+              disabled={isLoading}
+              tabIndex={-1}
+              disableRipple
+            />
+          )
         }
       </ListItemIcon>
       <ListItemText primary={item.text} />
