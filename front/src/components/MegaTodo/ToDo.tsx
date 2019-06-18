@@ -37,15 +37,15 @@ const ToDo: React.FC<IProps> = ({ todo }) => {
   const closeDialogs = useCallback(() => setCreating(false), []);
 
   const [ items ] = useObservable(() => {
-    return service.load().pipe(
-      combineLatest(filterService.getFilter()),
-      map(([items, filter]) => {
-        if (!filter) {
-          return items;
-        }
-        return items.filter(i => i.text.toLowerCase().includes(filter))
-      })
-    )
+    return service.load()
+      .pipe(
+        combineLatest(filterService.getFilter()),
+        map(([items, filterText]) => {
+          return '' === filterText
+            ? items
+            : items.filter(i => i.text.toLowerCase().includes(filterText))
+        })
+      )
   }, [todo.id]);
 
   const contextValue = useMemo((): ITodoContext => {
